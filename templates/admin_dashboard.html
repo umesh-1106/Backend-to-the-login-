@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f6f9;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:240px;
+    height:100%;
+    background:#0d6efd;
+    color:white;
+    padding:25px;
+}
+
+.sidebar h3{
+    text-align:center;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin-top:20px;
+    font-size:18px;
+}
+
+.sidebar a:hover{
+    color:yellow;
+}
+
+.main{
+    margin-left:260px;
+    padding:30px;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+}
+
+table{
+    background:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="sidebar">
+
+<h3>Admin Panel</h3>
+
+<hr>
+
+<a href="#">🏠 Dashboard</a>
+
+<a href="#">👥 Registered Users</a>
+
+<a href="/admin_logout">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h2>Welcome Admin</h2>
+
+<div class="row mt-4">
+
+<div class="col-md-4">
+
+<div class="card shadow p-4">
+
+<h5>Total Registered Users</h5>
+
+<h2>{{ users|length }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-5">
+
+<input
+type="text"
+id="search"
+class="form-control"
+placeholder="Search User..."
+onkeyup="searchTable()">
+
+</div>
+
+<div class="table-responsive mt-3">
+
+<table class="table table-bordered table-hover" id="userTable">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Mobile</th>
+
+<th>Email</th>
+
+<th>Registered Date</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user.id }}</td>
+
+<td>{{ user.name }}</td>
+
+<td>{{ user.mobile }}</td>
+
+<td>{{ user.email }}</td>
+
+<td>{{ user.created_at }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+function searchTable(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let table=document.getElementById("userTable");
+
+let tr=table.getElementsByTagName("tr");
+
+for(let i=1;i<tr.length;i++){
+
+let txt=tr[i].textContent.toLowerCase();
+
+tr[i].style.display=txt.includes(input)?"":"none";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
