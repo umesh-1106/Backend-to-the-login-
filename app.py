@@ -1,3 +1,11 @@
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+
+app = Flask(__name__)
+app.secret_key = "your_secret_key_here"  # Required to use flash messages and sessions
+
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    # ... your existing code continues here ...
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
 
